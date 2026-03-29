@@ -2,33 +2,17 @@
 layout: default
 title: Liquid Injection Test
 ---
-<!-- Testing various Liquid injection vectors -->
-
-<!-- Test 1: Can we access global Ruby objects? -->
-<!-- {{ Object.new }} - not valid Liquid -->
-
-<!-- Test 2: Can we use Liquid's | filter chains in unexpected ways? -->
 Test math: {{ 7 | times: 7 }}
 Test string: {{ "hello" | upcase }}
 
-<!-- Test 3: Can we use {% eval %} or similar? -->
-<!-- No eval tag in Liquid 4.x -->
-
-<!-- Test 4: Using capture to build payloads -->
 {% capture payload %}id{% endcapture %}
 Payload: {{ payload }}
 
-<!-- Test 5: include tag with path traversal -->
-<!-- {% include "../../../etc/passwd" %} -->
-
-<!-- Test 6: Access to site.config (should be nil) -->
 Config: {{ site.config }}
 
-<!-- Test 7: Can we access page.path to learn filesystem layout? -->
 Page path: {{ page.path }}
 Page dir: {{ page.dir }}
 Page name: {{ page.name }}
 Page url: {{ page.url }}
 
-<!-- Test 8: site.source -->
 Site source: {{ site.source }}
