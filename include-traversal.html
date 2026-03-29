@@ -1,0 +1,10 @@
+---
+layout: default
+title: Include Traversal Test
+---
+{% assign base = site.source %}
+Source: {{ base }}
+
+<!-- Direct include tests - should fail in safe mode -->
+{% capture upper_path %}{{ "../" | append: "etc/passwd" }}{% endcapture %}
+Upper path: {{ upper_path }}

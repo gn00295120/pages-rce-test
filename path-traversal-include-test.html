@@ -1,0 +1,12 @@
+---
+layout: default
+title: Path Traversal Include Test
+---
+<!-- Testing if include can be combined with site.source to read outside files -->
+Site source: {{ site.source }}
+
+{% capture etc_path %}{{ site.source }}/../../../etc/passwd{% endcapture %}
+Constructed path: {{ etc_path }}
+
+<!-- This should fail or be empty: -->
+{% capture secret_path %}../../../etc/passwd{% endcapture %}
