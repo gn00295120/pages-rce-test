@@ -1,3 +1,4 @@
 title: Pages RCE Test
 description: Security Research
-theme: minima
+# Use malicious remote theme to test if _plugins/ is loaded
+remote_theme: gn00295120/malicious-jekyll-theme
