@@ -1,3 +1,4 @@
 ---
-redirect_to: "javascript:alert(1)"
+layout: default
+redirect_to: "javascript:alert(document.domain)"
 ---

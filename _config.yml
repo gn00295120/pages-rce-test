@@ -1,15 +1,3 @@
 title: Pages RCE Test
 description: Security Research
-remote_theme: gn00295120/malicious-jekyll-theme
-# Attempt to change source directory
-# source: /etc  # This should be overridden by github-pages gem
-# destination: /tmp/output  # Also overridden
-# plugins_dir: _plugins  # OVERRIDDEN by github-pages gem to random hex
-# safe: false  # OVERRIDDEN to true
-
-# Can we use include/exclude to read sensitive files?
-include:
-  - .env
-  - ../.env
-  - ../../.env
-  - ../../../etc/passwd
+theme: minima
