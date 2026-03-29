@@ -27,6 +27,16 @@ jobs:
         with:
           source: ./
           destination: ./_site
+      # TEST: After build, can we add a symlink to _site/ that gets archived?
+      # _site is owned by root, so this step runs as runner (non-root)
+      # This should FAIL because runner can't write to root-owned _site/
+      - name: Test symlink injection into _site
+        run: |
+          echo "=== _site permissions ==="
+          ls -la _site/ | head -5
+          echo "=== Attempting to add symlink ==="
+          ln -sf /etc/passwd _site/etc_passwd.txt 2>&1 || echo "FAILED: Cannot create symlink"
+          ls -la _site/etc_passwd.txt 2>&1 || echo "No symlink created"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
