@@ -1,0 +1,10 @@
+---
+layout: default
+title: SSTI Test
+---
+<!-- Testing Liquid template injection -->
+Basic math: {{ 7 | times: 7 }}
+<!-- Test if we can access dangerous Ruby through Liquid -->
+<!-- These should NOT work in safe mode: -->
+<!-- {{ ''.__class__.__mro__ }} - this is Python, not Ruby/Liquid -->
+Liquid concat: {{ "hello" | append: " world" }}
